@@ -1,3 +1,5 @@
+<?php
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" type="text/css" href="../eattendance/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../eattendance/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
     
 
 <!-- jQuery library -->
@@ -25,7 +27,7 @@
     <div>
 
         <div >
-                <img class="mainlogo" src="../eattendance/images/Logo 2.png" alt="">
+                <img class="mainlogo" src="./images/Logo 2.png" alt="">
 
         </div>
 
