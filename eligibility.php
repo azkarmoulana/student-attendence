@@ -81,6 +81,7 @@ for ($i=1; $i<6; $i++) {
   </thead>
   <tbody>
       <?php
+      $x=1;
         foreach($moduleCount as $mc){
 
           if ($mc['Total'] == 0) {
@@ -97,12 +98,13 @@ for ($i=1; $i<6; $i++) {
             $eligibility = "Not Eligible";
           }
          echo   '<tr>
-      <th scope="row">1</th>
+      <th scope="row">'.$x.'</th>
       <td>BC2003</td>
       <td>'.$mc['Module'].'</td>
       <td>'. floor($percentage).'%</td>
       <td>'. $eligibility.'</td> 
     </tr>';
+    $x++;
         }
       ?>
   </tbody>
