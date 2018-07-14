@@ -7,8 +7,8 @@ body {
     background: 
      
     linear-gradient(
-      rgba(0, 0, 0, 0.70), 
-      rgba(0, 0, 0, 0.70)
+      rgba(0, 0, 0, 0.90), 
+      rgba(0, 0, 0, 0.10)
     ),
     
     url(../images/background.jpg);
