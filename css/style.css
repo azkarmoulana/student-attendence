@@ -132,3 +132,14 @@ div#content-box-head {
     margin-right: auto;
     width: 300px;
 }
+
+
+.breadcrumb-item{
+    color: #fff;
+    font-size: 25px;
+}
+
+.breadcrumb {
+    background-color: #575757;
+
+}

@@ -1,5 +1,7 @@
 <?php
+    include_once 'includes/dbh.inc.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,9 +42,9 @@
 
         <div class="home-form">
             <p>Check your eligibility :</p>
-            <form action="">
-                <input type="text" class="form-control " placeholder="Enter your ID here     Ex : 1000383"> <br>
-                <button type="submit" class="btn btn-outline-primary">Check</button>
+            <form action="includes/check.inc.php" method="POST">
+                <input type="text" name="sid" class="form-control " placeholder="Enter your ID here     Ex : 1000383"> <br>
+                <button type="submit" name="submit" class="btn btn-outline-primary">Check</button>
             </form>
         </div>
 
