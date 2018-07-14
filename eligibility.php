@@ -1,6 +1,31 @@
 <?php
 
+include_once 'includes/dbh.inc.php';
 session_start();
+
+$moduleCount = [];
+
+$stuID = $_SESSION['stid'];
+
+
+for ($i=1; $i<6; $i++) {
+
+  $sql = "SELECT count(*) as total, module.name as module_name FROM attendence, module WHERE module.moduleid=attendence.moduleid AND attendence.moduleid='$i'";
+  $result = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($result);
+
+  $sql2 = "SELECT count(*) as std_att FROM student st, attendence att, attendence_students adata WHERE st.sid=adata.student_id AND att.attendenceid=adata.attendenceid AND st.sid='$stuID' AND att.moduleid='$i';";
+  $result2 = mysqli_query($conn, $sql2);
+  $row2 = mysqli_fetch_assoc($result2);
+
+  
+  array_push($moduleCount,array("Total"=>$row['total'],"Module"=>$row['module_name'],"Std_attend"=>$row2['std_att']));
+  // array_push($moduleCount,$row);
+  
+}
+
+// print_r($moduleCount);
+// exit();
 
 ?>
 
@@ -32,7 +57,11 @@ session_start();
   </ol>
   </nav>
 
-    <p class="lead">This is your exam eligibility results for semester 2 modules</p>
+    <p class="lead">This is your exam eligibility results for this semester modules <span class="deg-span">(<?php 
+      if (isset($_SESSION['dname'])) {
+        echo $_SESSION['dname'];
+      }
+    ?>)</span></p>
     <hr class="my-4">
     <div class="div-span">
       <span class="congrad">Congradulations!</span>
@@ -51,34 +80,31 @@ session_start();
     </tr>
   </thead>
   <tbody>
-    <tr>
+      <?php
+        foreach($moduleCount as $mc){
+
+          if ($mc['Total'] == 0) {
+            break;
+
+          }
+         //$percentage = ($mc['Std_attend']/$mc['Total'])*100;
+          $percentage = bcmul(bcdiv($mc['Std_attend'], $mc['Total'],2),100,2);
+          //bcdiv($mc['Std_attend'], $mc['Total'],2);
+          $eligibility;
+          if ($percentage > 50) {
+            $eligibility = "Eligible";
+          } else {
+            $eligibility = "Not Eligible";
+          }
+         echo   '<tr>
       <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Eligible</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>Eligible</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>Eligible</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <td>Eligible</td>
-    </tr>
+      <td>BC2003</td>
+      <td>'.$mc['Module'].'</td>
+      <td>'. floor($percentage).'%</td>
+      <td>'. $eligibility.'</td> 
+    </tr>';
+        }
+      ?>
   </tbody>
 </table>
 
